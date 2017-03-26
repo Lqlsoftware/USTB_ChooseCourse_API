@@ -21,13 +21,13 @@ import com.alibaba.fastjson.JSON;
 @SuppressWarnings("deprecation")
 public class ChooseCourse {
 	private static DefaultHttpClient httpclient;
-	// Ñ§ºÅ
+	// å­¦å·
 	private String username = "41524194";
 	
-	// ÃÜÂë
+	// å¯†ç 
 	private String password = "Lqlluyuli123";
 	
-	// Ä¬ÈÏ²ÎÊı(Ñ§Éú)
+	// é»˜è®¤å‚æ•°(å­¦ç”Ÿ)
 	private static String Parameter = ",undergraduate";
 
 	public String getUsername() {
@@ -42,40 +42,34 @@ public class ChooseCourse {
 		this.password = password;
 	}
 	
-	// ¿ªÊ¼Ê±Ö´ĞĞ
-	{
-		httpclient = new DefaultHttpClient();
-		httpclient.setRedirectStrategy(new LaxRedirectStrategy());
-	}
-	
-	public Boolean getLogin() {
+	public Boolean getLogin(DefaultHttpClient httpclient) {
 		HttpPost httppost = null;
 		try {
-			// postÁ¬½ÓURL
+			// postè¿æ¥URL
 			httppost = new HttpPost("http://elearning.ustb.edu.cn/choose_courses/j_spring_security_check");
-			// ÉèÖÃHeader
+			// è®¾ç½®Header
 			httppost.setHeader("UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
 			httppost.setHeader("X-Requested-With", "XMLHttpRequest");
 			httppost.setHeader("Accept-Language", "zh-CN");
 			httppost.setHeader("Accept-Encoding", "gzip, deflate");
 			httppost.setHeader("Accept", "*/*");
-			// ÉèÖÃ²ÎÊı
+			// è®¾ç½®å‚æ•°
 	        List<NameValuePair> params = new ArrayList<NameValuePair>();
 	        params.add(new BasicNameValuePair("j_username", this.username+ChooseCourse.Parameter));
 	        params.add(new BasicNameValuePair("j_password", this.password));
 	        httppost.setEntity(new UrlEncodedFormEntity(params));
-	        // ·¢ËÍÇëÇó
+	        // å‘é€è¯·æ±‚
 	        HttpResponse  response = httpclient.execute(httppost);
 	        
 		    HttpEntity entity = response.getEntity();
 		    String postResult = EntityUtils.toString(entity,"UTF-8");
 	        login userLogin = JSON.parseObject(postResult,login.class);
 	        if (userLogin.getSuccess().equals("true")) {
-	 //       	System.out.println(this.username + " µÇÂ¼³É¹¦");
+	 //       	System.out.println(this.username + " ç™»å½•æˆåŠŸ");
 	        	return true;
 	        }
 	        else {
-	        	System.out.println("µÇÂ¼Ê§°Ü");
+	        	System.out.println("ç™»å½•å¤±è´¥");
 	        	return false;
      		}
 		} catch (Exception e) {
@@ -121,34 +115,34 @@ public class ChooseCourse {
 	public Boolean addCourses(AlternativeCourses AC) {
 		HttpPost httppost = null;
 		try {
-			// postÁ¬½ÓURL
+			// postè¿æ¥URL
 			httppost = new HttpPost("http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalPublicSelective_addFormalNormalPublicSelectiveCourse.action");
-			// ÉèÖÃHeader
+			// è®¾ç½®Header
 			httppost.setHeader("UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
 			httppost.setHeader("X-Requested-With", "XMLHttpRequest");
 			httppost.setHeader("Accept-Language", "zh-CN");
 			httppost.setHeader("Accept-Encoding", "gzip, deflate");
 			httppost.setHeader("Accept", "*/*");
-			// ÉèÖÃ²ÎÊı
+			// è®¾ç½®å‚æ•°
 	        List<NameValuePair> params = new ArrayList<NameValuePair>();
 	        params.add(new BasicNameValuePair("id", AC.getID()));
 	        params.add(new BasicNameValuePair("uid", username));
 	        params.add(new BasicNameValuePair("xf", AC.getXF()));
-	        params.add(new BasicNameValuePair("xkfs", "¹«¹²Ñ¡ĞŞ¿Î"));
+	        params.add(new BasicNameValuePair("xkfs", "å…¬å…±é€‰ä¿®è¯¾"));
 	        params.add(new BasicNameValuePair("xh", ""));
 	        httppost.setEntity(new UrlEncodedFormEntity(params));
-	        // ·¢ËÍÇëÇó
+	        // å‘é€è¯·æ±‚
 	        HttpResponse  response = httpclient.execute(httppost);
 	        
 		    HttpEntity entity = response.getEntity();
 		    String postResult = EntityUtils.toString(entity,"UTF-8");
 	        responseMassage msg = JSON.parseObject(postResult,responseMassage.class);
 	        if (msg.getSuccess().equals("true")) {
-	        	System.out.println(AC.getKCM() + " Ñ¡¿Î³É¹¦");
+	        	System.out.println(AC.getKCM() + " é€‰è¯¾æˆåŠŸ");
 	        	return true;
 	        }
 	        else {
-	        	System.out.println(AC.getKCM() + " Ñ¡¿ÎÊ§°Ü");
+	        	System.out.println(AC.getKCM() + " é€‰è¯¾å¤±è´¥");
 	        	return false;
      		}
 		} catch (Exception e) {
@@ -161,9 +155,11 @@ public class ChooseCourse {
 	
 	
 	public static void main (String[] argv) throws InterruptedException {
+		DefaultHttpClient httpclient = new DefaultHttpClient();
+		httpclient.setRedirectStrategy(new LaxRedirectStrategy());
 		ChooseCourse cc = new ChooseCourse();
-		cc.getLogin();
-		cc.getAlternativeCourses();
-		ChooseCourse.httpclient.close();
+		cc.getLogin(httpclient);
+		cc.getAlternativeCourses(httpclient);
+		httpclient.close();
 	}
 }
