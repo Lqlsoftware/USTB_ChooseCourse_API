@@ -80,7 +80,7 @@ public class ChooseCourse {
 		return false;
 	}
 	
-	public ArrayList<AlternativeCourses> getAlternativeCourses() {
+	public ArrayList<AlternativeCourses> getAlternativeCourses(DefaultHttpClient httpclient) {
 		ArrayList<AlternativeCourses> AC = null;
 		HttpGet httpget = null;
 		try {
@@ -112,7 +112,7 @@ public class ChooseCourse {
 		return AC;
 	}
 	
-	public Boolean addCourses(AlternativeCourses AC) {
+	public Boolean addCourses(AlternativeCourses AC, DefaultHttpClient httpclient) {
 		HttpPost httppost = null;
 		try {
 			// post连接URL
