@@ -112,6 +112,38 @@ public class ChooseCourse {
 		return AC;
 	}
 	
+	public ArrayList<ChoosedCourses> getChoosedCourses(DefaultHttpClient httpclient) {
+		ArrayList<ChoosedCourses> CC = null;
+		HttpGet httpget = null;
+		try {
+			String uri = "http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalPublicSelective_loadFormalNormalPublicSelectiveCourses.action?";
+			StringBuffer url = new StringBuffer(uri);
+			url.append("xqj=").append("null");
+			url.append("&jc=").append("null");
+			url.append("&kcm=");
+			url.append("&_dc=").append(new Date().getTime());
+			url.append("&limit=").append(5000);
+			url.append("&start=").append(0);
+			url.append("&uid=").append(this.username);
+			httpget = new HttpGet(url.toString());
+	        HttpResponse  response = httpclient.execute(httpget);
+	        HttpEntity entity = response.getEntity();
+	        String postResult = EntityUtils.toString(entity,"UTF-8");
+	        
+	        CourseType CT = JSON.parseObject(postResult, CourseType.class);
+	        CC =  (ArrayList<ChoosedCourses>) JSON.parseArray(CT.getAlternativeCourses(),AlternativeCourses.class);
+/*	        for (AlternativeCourses ac : AC)
+	        	if (ac.getSKRS()<ac.getKRL())
+	        		System.out.println(String.format("%4s", ac.getSKRS()) + "/" + String.format("%-4s", ac.getKRL()) + "         " + ac.getKCM());
+	*/        
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httpget.releaseConnection();
+		}
+		return CC;
+	}
+	
 	public Boolean addCourses(AlternativeCourses AC, DefaultHttpClient httpclient) {
 		HttpPost httppost = null;
 		try {
