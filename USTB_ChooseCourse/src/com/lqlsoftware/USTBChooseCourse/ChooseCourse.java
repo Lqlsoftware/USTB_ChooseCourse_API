@@ -131,11 +131,7 @@ public class ChooseCourse {
 	        String postResult = EntityUtils.toString(entity,"UTF-8");
 	        
 	        CourseType CT = JSON.parseObject(postResult, CourseType.class);
-	        CC =  (ArrayList<ChoosedCourses>) JSON.parseArray(CT.getAlternativeCourses(),AlternativeCourses.class);
-/*	        for (AlternativeCourses ac : AC)
-	        	if (ac.getSKRS()<ac.getKRL())
-	        		System.out.println(String.format("%4s", ac.getSKRS()) + "/" + String.format("%-4s", ac.getKRL()) + "         " + ac.getKCM());
-	*/        
+	        CC =  (ArrayList<ChoosedCourses>) JSON.parseArray(CT.getChoosedCourses(),ChoosedCourses.class);      
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
