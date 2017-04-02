@@ -65,11 +65,11 @@ public class ChooseCourse {
 		    String postResult = EntityUtils.toString(entity,"UTF-8");
 	        login userLogin = JSON.parseObject(postResult,login.class);
 	        if (userLogin.getSuccess().equals("true")) {
-	 //       	System.out.println(this.username + " 登录成功");
+	        	System.out.println(this.username + " 登录成功");
 	        	return true;
 	        }
 	        else {
-	        	System.out.println("登录失败");
+	        	System.out.println(this.username + "登录失败");
 	        	return false;
      		}
 		} catch (Exception e) {
@@ -100,10 +100,11 @@ public class ChooseCourse {
 	        
 	        CourseType CT = JSON.parseObject(postResult, CourseType.class);
 	        AC =  (ArrayList<AlternativeCourses>) JSON.parseArray(CT.getAlternativeCourses(),AlternativeCourses.class);
-/*	        for (AlternativeCourses ac : AC)
+	        for (AlternativeCourses ac : AC)
 	        	if (ac.getSKRS()<ac.getKRL())
 	        		System.out.println(String.format("%4s", ac.getSKRS()) + "/" + String.format("%-4s", ac.getKRL()) + "         " + ac.getKCM());
-	*/        
+			else
+				AC.sub(ac);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
