@@ -1,0 +1,3 @@
+class ChoosedCourses {
+  public
+}
