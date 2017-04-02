@@ -21,12 +21,6 @@ public class ChoosedCourses {
 	
 	// 学分
 	private String XF;
-
-	// 课程容量
-	private Long KRL;
-
-	// 上课人数  已选
-	private Long SKRS;
 	
 	// 补选截止时间
 	private String BXJZRQ;
