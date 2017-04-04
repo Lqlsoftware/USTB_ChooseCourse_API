@@ -94,18 +94,6 @@ public class ChoosedCourses {
 		return KRL;
 	}
 
-	public void setKRL(Long kRL) {
-		KRL = kRL;
-	}
-
-	public Long getSKRS() {
-		return SKRS;
-	}
-
-	public void setSKRS(Long sKRS) {
-		SKRS = sKRS;
-	}
-
 	public String getBXJZRQ() {
 		return BXJZRQ;
 	}
