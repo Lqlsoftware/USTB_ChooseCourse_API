@@ -20,7 +20,6 @@ import com.alibaba.fastjson.JSON;
 
 @SuppressWarnings("deprecation")
 public class ChooseCourse {
-	private static DefaultHttpClient httpclient;
 	// 学号
 	private String username = "41524194";
 	
