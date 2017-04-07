@@ -184,7 +184,8 @@ public class ChooseCourse {
 		}
 		return false;
 	}
-	
+	public Boolean delCourses(ChoosedCourses CC, DefaultHttpClient httpclient) {
+	}
 	
 	public static void main (String[] argv) throws InterruptedException {
 		DefaultHttpClient httpclient = new DefaultHttpClient();
