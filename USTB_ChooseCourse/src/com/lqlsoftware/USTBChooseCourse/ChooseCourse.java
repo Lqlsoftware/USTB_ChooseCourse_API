@@ -185,6 +185,44 @@ public class ChooseCourse {
 		return false;
 	}
 	public Boolean delCourses(ChoosedCourses CC, DefaultHttpClient httpclient) {
+		HttpPost httppost = null;
+		try {
+			// post连接URL
+			httppost = new HttpPost("http://elearning.ustb.edu.cn/choose_courses/choosecourse/normalChooseCourse_normalPublicSelective_addFormalNormalPublicSelectiveCourse.action");
+			// 设置Header
+			httppost.setHeader("UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
+			httppost.setHeader("X-Requested-With", "XMLHttpRequest");
+			httppost.setHeader("Accept-Language", "zh-CN");
+			httppost.setHeader("Accept-Encoding", "gzip, deflate");
+			httppost.setHeader("Accept", "*/*");
+			// 设置参数
+	        List<NameValuePair> params = new ArrayList<NameValuePair>();
+	        params.add(new BasicNameValuePair("id", AC.getID()));
+	        params.add(new BasicNameValuePair("uid", username));
+	        params.add(new BasicNameValuePair("xf", AC.getXF()));
+	        params.add(new BasicNameValuePair("xkfs", "公共选修课"));
+	        params.add(new BasicNameValuePair("xh", ""));
+	        httppost.setEntity(new UrlEncodedFormEntity(params));
+	        // 发送请求
+	        HttpResponse  response = httpclient.execute(httppost);
+	        
+		    HttpEntity entity = response.getEntity();
+		    String postResult = EntityUtils.toString(entity,"UTF-8");
+	        responseMassage msg = JSON.parseObject(postResult,responseMassage.class);
+	        if (msg.getSuccess().equals("true")) {
+	        	System.out.println(CC.getKCM() + " 退课成功");
+	        	return true;
+	        }
+	        else {
+	        	System.out.println(CC.getKCM() + " 退课失败");
+	        	return false;
+     		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httppost.releaseConnection();
+		}
+		return false;
 	}
 	
 	public static void main (String[] argv) throws InterruptedException {
