@@ -197,9 +197,9 @@ public class ChooseCourse {
 			httppost.setHeader("Accept", "*/*");
 			// 设置参数
 	        List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair("id", AC.getID()));
+	        params.add(new BasicNameValuePair("id", CC.getID()));
 	        params.add(new BasicNameValuePair("uid", username));
-	        params.add(new BasicNameValuePair("xf", AC.getXF()));
+	        params.add(new BasicNameValuePair("xf", CC.getXF()));
 	        params.add(new BasicNameValuePair("xkfs", "公共选修课"));
 	        params.add(new BasicNameValuePair("xh", ""));
 	        httppost.setEntity(new UrlEncodedFormEntity(params));
