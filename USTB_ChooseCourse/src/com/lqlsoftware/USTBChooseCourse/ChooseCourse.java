@@ -43,6 +43,7 @@ public class ChooseCourse {
 	
 	public void helloworld () {
 		System.out.println("hello world!");	
+		this.password = “helloworld”；
 	}
 	
 	public Boolean getLogin(DefaultHttpClient httpclient) {
