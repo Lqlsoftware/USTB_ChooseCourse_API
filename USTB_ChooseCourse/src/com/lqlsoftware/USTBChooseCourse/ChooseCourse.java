@@ -21,10 +21,10 @@ import com.alibaba.fastjson.JSON;
 @SuppressWarnings("deprecation")
 public class ChooseCourse {
 	// 学号
-	private String username = "6666";
+	private String username;
 	
 	// 密码
-	private String password = "password";
+	private String password;
 	
 	// 默认参数(学生)
 	private static String Parameter = ",undergraduate";
