@@ -28,6 +28,8 @@ public class ChooseCourse {
 	
 	// 默认参数(学生)
 	private static String Parameter = ",undergraduate";
+	
+	private Boolean isLogin;
 
 	public String getUsername() {
 		return username;
@@ -70,12 +72,13 @@ public class ChooseCourse {
 	        login userLogin = JSON.parseObject(postResult,login.class);
 	        if (userLogin.getSuccess().equals("true")) {
 	        	System.out.println(this.username + " 登录成功");
+			isLogin = true;
 	        	return true;
 	        }
 	        else {
 	        	System.out.println(this.username + "登录失败");
 	        	return false;
-     		}
+     		}t
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
