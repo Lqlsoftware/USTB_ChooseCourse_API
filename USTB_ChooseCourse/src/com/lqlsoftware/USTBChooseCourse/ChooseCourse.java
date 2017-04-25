@@ -234,7 +234,7 @@ public class ChooseCourse {
 		httpclient.setRedirectStrategy(new LaxRedirectStrategy());
 		ChooseCourse cc = new ChooseCourse();
 		cc.setUsername("username");
-		cc.setPassword("password");
+		cc.setPassword("mypassword");
 		cc.getLogin(httpclient);
 		cc.getAlternativeCourses(httpclient);
 		httpclient.close();
