@@ -45,7 +45,8 @@ public class ChooseCourse {
 	
 	public void helloworld () {
 		System.out.println("hello world!");	
-		this.password = “helloworld”；
+		this.password = "helloworld";
+		this.username = "username";
 	}
 	
 	public Boolean getLogin(DefaultHttpClient httpclient) {
