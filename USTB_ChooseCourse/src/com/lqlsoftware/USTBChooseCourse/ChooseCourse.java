@@ -231,11 +231,12 @@ public class ChooseCourse {
 	}
 	
 	public static void main (String[] argv) throws InterruptedException {
+		// 还是只能实现一次登陆 无法保存HttpClient对象
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		httpclient.setRedirectStrategy(new LaxRedirectStrategy());
 		ChooseCourse cc = new ChooseCourse();
-		cc.setUsername("username");
-		cc.setPassword("mypassword");
+		cc.setUsername("MYusername");
+		cc.setPassword("MYpassword");
 		cc.getLogin(httpclient);
 		cc.getAlternativeCourses(httpclient);
 		httpclient.close();
