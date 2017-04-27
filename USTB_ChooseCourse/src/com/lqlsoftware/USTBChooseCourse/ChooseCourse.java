@@ -102,19 +102,20 @@ public class ChooseCourse {
 			url.append("&start=").append(0);
 			url.append("&uid=").append(this.username);
 			httpget = new HttpGet(url.toString());
-	        HttpResponse  response = httpclient.execute(httpget);
-	        HttpEntity entity = response.getEntity();
-	        String postResult = EntityUtils.toString(entity,"UTF-8");
+	        	HttpResponse  response = httpclient.execute(httpget);
+	        	HttpEntity entity = response.getEntity();
+	        	String postResult = EntityUtils.toString(entity,"UTF-8");
 	        
-	        CourseType CT = JSON.parseObject(postResult, CourseType.class);
-	        AC =  (ArrayList<AlternativeCourses>) JSON.parseArray(CT.getAlternativeCourses(),AlternativeCourses.class);
-	        for (AlternativeCourses ac : AC)
-	        	if (ac.getSKRS()<ac.getKRL())
-	        		System.out.println(String.format("%4s", ac.getSKRS()) + "/" + String.format("%-4s", ac.getKRL()) + "         " + ac.getKCM());
-			else
-				AC.sub(ac);
+	        	CourseType CT = JSON.parseObject(postResult, CourseType.class);
+	        	AC =  (ArrayList<AlternativeCourses>) JSON.parseArray(CT.getAlternativeCourses(),AlternativeCourses.class);
+	        	for (AlternativeCourses ac : AC)
+	        		if (ac.getSKRS()<ac.getKRL())
+	        			System.out.println(String.format("%4s", ac.getSKRS()) + "/" + String.format("%-4s", ac.getKRL()) + "         " + ac.getKCM());
+				else
+					AC.sub(ac);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Connection Failed.");
 		} finally {
 			httpget.releaseConnection();
 		}
@@ -135,14 +136,15 @@ public class ChooseCourse {
 			url.append("&start=").append(0);
 			url.append("&uid=").append(this.username);
 			httpget = new HttpGet(url.toString());
-	        HttpResponse  response = httpclient.execute(httpget);
-	        HttpEntity entity = response.getEntity();
-	        String postResult = EntityUtils.toString(entity,"UTF-8");
+			HttpResponse  response = httpclient.execute(httpget);
+	        	HttpEntity entity = response.getEntity();
+	        	String postResult = EntityUtils.toString(entity,"UTF-8");
 	        
-	        CourseType CT = JSON.parseObject(postResult, CourseType.class);
-	        CC =  (ArrayList<ChoosedCourses>) JSON.parseArray(CT.getChoosedCourses(),ChoosedCourses.class);      
+	        	CourseType CT = JSON.parseObject(postResult, CourseType.class);
+	        	CC =  (ArrayList<ChoosedCourses>) JSON.parseArray(CT.getChoosedCourses(),ChoosedCourses.class);      
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Connection Failed.");
 		} finally {
 			httpget.releaseConnection();
 		}
@@ -161,29 +163,30 @@ public class ChooseCourse {
 			httppost.setHeader("Accept-Encoding", "gzip, deflate");
 			httppost.setHeader("Accept", "*/*");
 			// 设置参数
-	        List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair("id", AC.getID()));
-	        params.add(new BasicNameValuePair("uid", username));
-	        params.add(new BasicNameValuePair("xf", AC.getXF()));
-	        params.add(new BasicNameValuePair("xkfs", "公共选修课"));
-	        params.add(new BasicNameValuePair("xh", ""));
-	        httppost.setEntity(new UrlEncodedFormEntity(params));
-	        // 发送请求
-	        HttpResponse  response = httpclient.execute(httppost);
+	        	List<NameValuePair> params = new ArrayList<NameValuePair>();
+	        	params.add(new BasicNameValuePair("id", AC.getID()));
+	        	params.add(new BasicNameValuePair("uid", username));
+	        	params.add(new BasicNameValuePair("xf", AC.getXF()));
+	        	params.add(new BasicNameValuePair("xkfs", "公共选修课"));
+	        	params.add(new BasicNameValuePair("xh", ""));
+	        	httppost.setEntity(new UrlEncodedFormEntity(params));
+	        	// 发送请求
+	        	HttpResponse  response = httpclient.execute(httppost);
 	        
-		    HttpEntity entity = response.getEntity();
-		    String postResult = EntityUtils.toString(entity,"UTF-8");
-	        responseMassage msg = JSON.parseObject(postResult,responseMassage.class);
-	        if (msg.getSuccess().equals("true")) {
-	        	System.out.println(AC.getKCM() + " 选课成功");
-	        	return true;
-	        }
-	        else {
-	        	System.out.println(AC.getKCM() + " 选课失败");
-	        	return false;
-     		}
+		    	HttpEntity entity = response.getEntity();
+		    	String postResult = EntityUtils.toString(entity,"UTF-8");
+	        	responseMassage msg = JSON.parseObject(postResult,responseMassage.class);
+	        	if (msg.getSuccess().equals("true")) {
+				System.out.println(AC.getKCM() + " 选课成功");
+				return true;
+			}
+			else {
+				System.out.println(AC.getKCM() + " 选课失败");
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Connection Failed.");
 		} finally {
 			httppost.releaseConnection();
 		}
@@ -201,29 +204,30 @@ public class ChooseCourse {
 			httppost.setHeader("Accept-Encoding", "gzip, deflate");
 			httppost.setHeader("Accept", "*/*");
 			// 设置参数
-	        List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair("id", CC.getID()));
-	        params.add(new BasicNameValuePair("uid", username));
-	        params.add(new BasicNameValuePair("xf", CC.getXF()));
-	        params.add(new BasicNameValuePair("xkfs", "公共选修课"));
-	        params.add(new BasicNameValuePair("xh", ""));
-	        httppost.setEntity(new UrlEncodedFormEntity(params));
-	        // 发送请求
-	        HttpResponse  response = httpclient.execute(httppost);
-	        
-		    HttpEntity entity = response.getEntity();
-		    String postResult = EntityUtils.toString(entity,"UTF-8");
-	        responseMassage msg = JSON.parseObject(postResult,responseMassage.class);
-	        if (msg.getSuccess().equals("true")) {
-	        	System.out.println(CC.getKCM() + " 退课成功");
-	        	return true;
-	        }
-	        else {
-	        	System.out.println(CC.getKCM() + " 退课失败");
-	        	return false;
-     		}
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", CC.getID()));
+			params.add(new BasicNameValuePair("uid", username));
+			params.add(new BasicNameValuePair("xf", CC.getXF()));
+			params.add(new BasicNameValuePair("xkfs", "公共选修课"));
+			params.add(new BasicNameValuePair("xh", ""));
+			httppost.setEntity(new UrlEncodedFormEntity(params));
+			// 发送请求
+			HttpResponse  response = httpclient.execute(httppost);
+
+			    HttpEntity entity = response.getEntity();
+			    String postResult = EntityUtils.toString(entity,"UTF-8");
+			responseMassage msg = JSON.parseObject(postResult,responseMassage.class);
+			if (msg.getSuccess().equals("true")) {
+				System.out.println(CC.getKCM() + " 退课成功");
+				return true;
+			}
+			else {
+				System.out.println(CC.getKCM() + " 退课失败");
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Connection Failed.");
 		} finally {
 			httppost.releaseConnection();
 		}
