@@ -45,7 +45,7 @@ public class ChooseCourse {
 	
 	public void helloworld () {
 		System.out.println("hello world!");	
-		this.password = "helloworld";
+		this.password = "66666";
 		this.username = "username";
 	}
 	
@@ -241,6 +241,7 @@ public class ChooseCourse {
 		ChooseCourse cc = new ChooseCourse();
 		cc.setUsername("MYusername");
 		cc.setPassword("MYpassword");
+		System.out.println("Try Loging.");
 		cc.getLogin(httpclient);
 		cc.getAlternativeCourses(httpclient);
 		httpclient.close();
