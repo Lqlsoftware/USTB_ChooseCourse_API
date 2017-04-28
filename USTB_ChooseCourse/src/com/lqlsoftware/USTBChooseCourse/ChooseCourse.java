@@ -243,6 +243,7 @@ public class ChooseCourse {
 		cc.setPassword("MYpassword");
 		System.out.println("Try Loging.");
 		cc.getLogin(httpclient);
+		System.out.println("Try Getting Courses");
 		cc.getAlternativeCourses(httpclient);
 		httpclient.close();
 	}
