@@ -44,9 +44,9 @@ public class ChooseCourse {
 	}
 	
 	public void helloworld () {
-		System.out.println("hello world!");	
 		this.password = "66666";
 		this.username = "username";
+		this.password = "66666";
 	}
 	
 	public Boolean getLogin(DefaultHttpClient httpclient) {
@@ -243,7 +243,7 @@ public class ChooseCourse {
 		cc.setPassword("MYpassword");
 		System.out.println("Try Loging.");
 		cc.getLogin(httpclient);
-		System.out.println("Try Getting Courses");
+		System.out.println("Try Getting Courses:");
 		cc.getAlternativeCourses(httpclient);
 		httpclient.close();
 	}
