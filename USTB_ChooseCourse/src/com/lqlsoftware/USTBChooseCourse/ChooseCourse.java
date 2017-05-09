@@ -43,10 +43,9 @@ public class ChooseCourse {
 		this.password = password;
 	}
 	
-	public void helloworld () {
-		this.password = "66666";
-		this.username = "username";
-		this.password = "66666";
+	public void setLogin (String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 	
 	public Boolean getLogin(DefaultHttpClient httpclient) {
