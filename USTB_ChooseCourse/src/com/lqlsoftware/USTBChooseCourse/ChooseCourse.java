@@ -43,7 +43,7 @@ public class ChooseCourse {
 		this.password = password;
 	}
 	
-	public void setLogin (String username, String password) {
+	public void setLoginStatus (String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
@@ -60,25 +60,25 @@ public class ChooseCourse {
 			httppost.setHeader("Accept-Encoding", "gzip, deflate");
 			httppost.setHeader("Accept", "*/*");
 			// 设置参数
-	        List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair("j_username", this.username+ChooseCourse.Parameter));
-	        params.add(new BasicNameValuePair("j_password", this.password));
-	        httppost.setEntity(new UrlEncodedFormEntity(params));
-	        // 发送请求
-	        HttpResponse  response = httpclient.execute(httppost);
-	        
-		    HttpEntity entity = response.getEntity();
-		    String postResult = EntityUtils.toString(entity,"UTF-8");
-	        login userLogin = JSON.parseObject(postResult,login.class);
-	        if (userLogin.getSuccess().equals("true")) {
-	        	System.out.println(this.username + " 登录成功");
-			isLogin = true;
-	        	return true;
-	        }
-	        else {
-	        	System.out.println(this.username + "登录失败");
-	        	return false;
-     		}t
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("j_username", this.username+ChooseCourse.Parameter));
+			params.add(new BasicNameValuePair("j_password", this.password));
+			httppost.setEntity(new UrlEncodedFormEntity(params));
+			// 发送请求
+			HttpResponse  response = httpclient.execute(httppost);
+
+			    HttpEntity entity = response.getEntity();
+			    String postResult = EntityUtils.toString(entity,"UTF-8");
+			login userLogin = JSON.parseObject(postResult,login.class);
+			if (userLogin.getSuccess().equals("true")) {
+				System.out.println(this.username + " 登录成功");
+				isLogin = true;
+				return true;
+			}
+			else {
+				System.out.println(this.username + "登录失败");
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
